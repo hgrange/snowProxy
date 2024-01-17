@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<server description="Intro REST Guide Liberty server">
+	<!-- tag::featureManager[] -->
+	<!--The Liberty Maven Plugin has generated Liberty features necessary for your application in configDropins/overrides/generated-features.xml-->
+	<featureManager>
+		<feature>restfulWS-3.1</feature>
+		<feature>jsonb-3.0</feature>
+		<feature>mpHealth-4.0</feature>
+		<feature>mpMetrics-5.0</feature>
+		<feature>transportSecurity-1.0</feature>
+		<feature>appSecurity-5.0</feature>
+		<feature>xmlBinding-4.0</feature>
+		<feature>restConnector-2.0</feature>
+		<feature>jdbc-4.2</feature>		
+        <feature>persistence-3.1</feature>
+	</featureManager>
+
+
+	<basicRegistry id="basic" realm="WebRealm">
+		<user name="admin" password="password"/>
+		<user name="alice" password="alicepwd"/>
+		<user name="carl" password="carlpwd"/>
+		<user name="abel.tuter" password="P4ssw0rd!"/>
+
+		<group name="AuthorizedGroup">
+			<member name="admin"/>
+		</group>
+	</basicRegistry>
+
+	<administrator-role>
+		<user>bob</user>
+		<group>AuthorizedGroup</group>
+	</administrator-role>
+
+   <!-- Derby Library Configuration -->    
+    <library id="derbyJDBCLib">
+      <fileset dir="${server.config.dir}/resources" includes="derby*.jar"/>
+    </library>
+    
+<!--	<dataSource jndiName="jdbc/incidentsDB" id="incidentsDB">
+	        <jdbcDriver libraryRef="derbyJDBCLib" />
+            <properties.derby.embedded databaseName="${DERBY_PATH}/storiesDB" createDatabase="create" />
+    </dataSource> -->
+    <dataSource jndiName="jdbc/incidentsDB" id="incidentsDB">
+	        <jdbcDriver libraryRef="derbyJDBCLib" />
+            <properties.derby.client databaseName="storiesDB" createDatabase="create" user="admin" password="admin" serverName="192.168.122.1" portNumber="1527"/>
+    </dataSource>
+	
+	<httpEndpoint host="${SERVER_HOST}" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+	<webAppSecurity overrideHttpAuthMethod="BASIC"/>
+
+	<keyStore id="defaultKeyStore" password="liberty"/>
+	<ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" sslProtocol="TLSv1.2,TLSv1.3" trustDefaultCerts="true"/>
+
+	<!-- <mpMetrics authentication="false"/> -->
+	<applicationManager autoExpand="true"/>
+	<application context-root="/" id="guide-rest-intro.war" location="guide-rest-intro.war" name="guide-rest-intro.war" type="war">
+		<application-bnd>
+			<security-role name="admin">
+    			<user name="admin"/>
+ 			</security-role>
+		</application-bnd>
+	</application>
+
+</server>
