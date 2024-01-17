@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: APP
+  namespace: NAMESPACE
+  labels:
+    app: APP
+    app.kubernetes.io/instance: websphere
+    app.kubernetes.io/name: APP
+spec:
+  path: /
+  to:
+    kind: Service
+    name: APP
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  port:
+    targetPort: http
