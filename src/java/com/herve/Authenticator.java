@@ -10,6 +10,7 @@ import jakarta.xml.bind.DatatypeConverter;
 
 
 public class Authenticator implements ClientRequestFilter {
+	// proxy on authent
 
     private final String user;
     private final String password;
