@@ -3,14 +3,12 @@
 	<!-- tag::featureManager[] -->
 	<!--The Liberty Maven Plugin has generated Liberty features necessary for your application in configDropins/overrides/generated-features.xml-->
 	<featureManager>
-		<feature>restfulWS-3.1</feature>
 		<feature>jsonb-3.0</feature>
 		<feature>mpHealth-4.0</feature>
 		<feature>mpMetrics-5.0</feature>
 		<feature>transportSecurity-1.0</feature>
 		<feature>appSecurity-5.0</feature>
 		<feature>xmlBinding-4.0</feature>
-		<feature>restConnector-2.0</feature>
 		<feature>jdbc-4.2</feature>		
         <feature>persistence-3.1</feature>
 	</featureManager>
@@ -46,7 +44,7 @@
             <properties.derby.client databaseName="storiesDB" createDatabase="create" user="admin" password="admin" serverName="192.168.122.1" portNumber="1527"/>
     </dataSource>
 	
-	<httpEndpoint host="${SERVER_HOST}" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+    <httpEndpoint host="${SERVER_HOST}" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 
 	<webAppSecurity overrideHttpAuthMethod="BASIC"/>
 
@@ -55,7 +53,7 @@
 
 	<!-- <mpMetrics authentication="false"/> -->
 	<applicationManager autoExpand="true"/>
-	<application context-root="/" id="guide-rest-intro.war" location="guide-rest-intro.war" name="guide-rest-intro.war" type="war">
+	<application context-root="/" id="snowproxy.war" location="snowproxy.war" name="snowproxy.war" type="war">
 		<application-bnd>
 			<security-role name="admin">
     			<user name="admin"/>

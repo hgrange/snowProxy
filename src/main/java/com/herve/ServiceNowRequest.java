@@ -11,14 +11,6 @@
 // end::copyright[]
 package com.herve;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Properties;
-
-import org.apache.http.client.utils.URIUtils;
-
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -27,8 +19,6 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.xml.bind.DatatypeConverter;
-import jakarta.json.JsonObject;
 
 @Path("/svnow")
 
