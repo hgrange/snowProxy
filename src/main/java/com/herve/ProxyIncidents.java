@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.json.Json;
@@ -50,7 +51,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
-
 @RequestScoped
 @Path("/")
 
@@ -67,6 +67,7 @@ public class ProxyIncidents  {
     
     @GET
     @Path("/nav_to.do")
+    @WithSpan
     public Response nav(@Context HttpHeaders headers, @Context final UriInfo uriInfo) throws URISyntaxException, UnsupportedEncodingException {
     	
     	String path = uriInfo.getPath();
